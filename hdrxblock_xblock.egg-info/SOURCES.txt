@@ -1,0 +1,13 @@
+README.md
+hdrxblock/__init__.py
+hdrxblock/hdrxblock.py
+hdrxblock/static/README.txt
+hdrxblock/static/css/hdrxblock.css
+hdrxblock/static/html/hdrxblock.html
+hdrxblock/static/js/src/hdrxblock.js
+hdrxblock_xblock.egg-info/PKG-INFO
+hdrxblock_xblock.egg-info/SOURCES.txt
+hdrxblock_xblock.egg-info/dependency_links.txt
+hdrxblock_xblock.egg-info/entry_points.txt
+hdrxblock_xblock.egg-info/requires.txt
+hdrxblock_xblock.egg-info/top_level.txt
