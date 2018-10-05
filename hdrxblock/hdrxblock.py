@@ -7,21 +7,24 @@ from xblock.fragment import Fragment
 
 
 class RoverHeaderXBlock(XBlock):
-    """
-    TO-DO: document what your XBlock does.
-    """
+
+    has_author_view = True # tells the xblock to use the AuthorView
 
     # Fields are defined on the class.  You can access them in your code as
     # self.<fieldname>.
 
-    hdr_title = String(help="Section header title", default="Section Title", scope=Scope.content)
+    hdr_title = String(help="Section header title", default="<h3>Foobar</h3><p>Mine is the last voice you will ever hear.</p>", scope=Scope.content)
     hdr_text = String(help="Section header text", default="Section Text", scope=Scope.content)
+    hdr_html = String(help="Section header html", default="<h2>Section Header</h2><p>Instructions for the next set of questions.", scope=Scope.content)
     hdr_book_link = String(help="Section textbook link URL", default="https://cnx.org/contents/9b08c294-057f-4201-9f48-5d6ad992740d", scope=Scope.content)
     hdr_book_icon = String(help="Section textbook icon URL", default="https://png.icons8.com/color/1600/literature.png", scope=Scope.content)
     hdr_book_help = String(help="Section textbook help text", default="Takes you to the corresponding section of the textbook", scope=Scope.content)
     hdr_playground_link = String(help="Section playground link URL", default="https://www.openstax.org", scope=Scope.content)
     hdr_playground_icon = String(help="Section playground icon URL", default="https://png.icons8.com/color/1600/playground.png", scope=Scope.content)
     hdr_playground_help = String(help="Section playground help text", default="This playground will help you learn.", scope=Scope.content)
+    hdr_video_link = String(help="Section video link URL", default="https://www.openstax.org", scope=Scope.content)
+    hdr_video_icon = String(help="Section video icon URL", default="https://png.icons8.com/color/50/000000/video-conference.png", scope=Scope.content)
+    hdr_video_help = String(help="Section video help text", default="This video will help you learn.", scope=Scope.content)
 
     count = Integer(
         default=0, scope=Scope.user_state,
@@ -33,7 +36,7 @@ class RoverHeaderXBlock(XBlock):
         data = pkg_resources.resource_string(__name__, path)
         return data.decode("utf8")
 
-    # TO-DO: change this view to display your data your own way.
+    # STUDENT VIEW
     def student_view(self, context=None):
         """
         The primary view of the RoverHeaderXBlock, shown to students
@@ -46,18 +49,38 @@ class RoverHeaderXBlock(XBlock):
         frag.initialize_js('RoverHeaderXBlock')
         return frag
 
-    # TO-DO: change this handler to perform your own actions.  You may need more
-    # than one handler, or you may not need any handlers at all.
-    @XBlock.json_handler
-    def increment_count(self, data, suffix=''):
+    # AUTHOR VIEW
+    def author_view(self, context=None):
         """
-        An example handler, which increments the data.
+        The primary view of the RoverHeaderXBlock, shown to instructors
+        when viewing assignments.
         """
-        # Just to show data coming in...
-        assert data['hello'] == 'world'
+        html = self.resource_string("static/html/hdrauthor.html")
+        frag = Fragment(html.format(self=self))
+        frag.add_css(self.resource_string("static/css/hdrauthor.css"))
+        frag.add_javascript(self.resource_string("static/js/src/hdrauthor.js"))
+        frag.initialize_js('RoverHeaderXBlock')
+        return frag
 
-        self.count += 1
-        return {"count": self.count}
+    # SAVE SECTION HEADER
+    @XBlock.json_handler
+    def save_header(self, data, suffix=''):
+        print "Hello"
+        self.hdr_html = data['hdr_html']
+
+        self.hdr_book_link = data['hdr_book_link']
+        self.hdr_book_icon = data['hdr_book_icon']
+        self.hdr_book_help = data['hdr_book_help']
+
+        self.hdr_playground_link = data['hdr_playground_link']
+        self.hdr_playground_icon = data['hdr_playground_icon']
+        self.hdr_playground_help = data['hdr_playground_help']
+
+        self.hdr_video_link = data['hdr_video_link']
+        self.hdr_video_icon = data['hdr_video_icon']
+        self.hdr_video_help = data['hdr_video_help']
+
+        return {'result': 'success'}
 
     # TO-DO: change this to create the scenarios you'd like to see in the
     # workbench while developing your XBlock.
@@ -67,12 +90,5 @@ class RoverHeaderXBlock(XBlock):
         return [
             ("RoverHeaderXBlock",
              """<hdrxblock/>
-             """),
-            ("Multiple RoverHeaderXBlock",
-             """<vertical_demo>
-                <hdrxblock/>
-                <hdrxblock/>
-                <hdrxblock/>
-                </vertical_demo>
-             """),
+             """)
         ]

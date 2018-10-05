@@ -97,3 +97,36 @@
 .hdr_icon_hidden {
     display: none;
 }
+
+.editing_controls {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.editing_controls_hidden {
+    display: none;
+}
+
+.grp_box {
+    max-width: 480px;
+}
+
+.hdr_icon_hidden {
+    display: none;
+}
+
+.hdr_editor_hidden {
+    display: none;
+}
+
+.hdr_edit_button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    height: 32px;
+    width: 32px;
+}
+
+.url-invalid {
+    border-color: red;
+}

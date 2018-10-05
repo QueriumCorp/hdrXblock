@@ -8,13 +8,17 @@
     </div>
     <div class="content">
         <div class="content_text">
-            <h2>{self.hdr_title}</h2>
-            <p>{self.hdr_text}</p>
+            {self.hdr_html}
         </div>
         <div class="content_icons">
             <div class="hdr_book">
                 <a href={self.hdr_book_link} target="_blank" >
                     <img src={self.hdr_book_icon}>
+                </a>
+            </div>
+            <div class="hdr_video">
+                <a href={self.hdr_video_link} target="_blank" >
+                    <img src={self.hdr_video_icon}>
                 </a>
             </div>
             <div class="hdr_playground">
