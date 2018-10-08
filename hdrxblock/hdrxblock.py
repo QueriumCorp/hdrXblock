@@ -8,14 +8,14 @@ from xblock.fragment import Fragment
 
 class RoverHeaderXBlock(XBlock):
 
-    has_author_view = True # tells the xblock to use the AuthorView
+    # has_author_view = True # tells the xblock to use the AuthorView
 
     # Fields are defined on the class.  You can access them in your code as
     # self.<fieldname>.
 
     hdr_title = String(help="Section header title", default="<h3>Foobar</h3><p>Mine is the last voice you will ever hear.</p>", scope=Scope.content)
     hdr_text = String(help="Section header text", default="Section Text", scope=Scope.content)
-    hdr_html = String(help="Section header html", default="<h2>Section Header</h2><p>Instructions for the next set of questions.", scope=Scope.content)
+    hdr_html = String(help="Section header html", default="<h2>Section Header</h2><p>Instructions for the next set of questions.</p>", scope=Scope.content)
     hdr_book_link = String(help="Section textbook link URL", default="https://cnx.org/contents/9b08c294-057f-4201-9f48-5d6ad992740d", scope=Scope.content)
     hdr_book_icon = String(help="Section textbook icon URL", default="https://png.icons8.com/color/1600/literature.png", scope=Scope.content)
     hdr_book_help = String(help="Section textbook help text", default="Takes you to the corresponding section of the textbook", scope=Scope.content)
@@ -25,11 +25,6 @@ class RoverHeaderXBlock(XBlock):
     hdr_video_link = String(help="Section video link URL", default="https://www.openstax.org", scope=Scope.content)
     hdr_video_icon = String(help="Section video icon URL", default="https://png.icons8.com/color/50/000000/video-conference.png", scope=Scope.content)
     hdr_video_help = String(help="Section video help text", default="This video will help you learn.", scope=Scope.content)
-
-    count = Integer(
-        default=0, scope=Scope.user_state,
-        help="A simple counter, to show something happening",
-    )
 
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
@@ -50,7 +45,7 @@ class RoverHeaderXBlock(XBlock):
         return frag
 
     # AUTHOR VIEW
-    def author_view(self, context=None):
+    def studio_view(self, context=None):
         """
         The primary view of the RoverHeaderXBlock, shown to instructors
         when viewing assignments.
@@ -65,7 +60,6 @@ class RoverHeaderXBlock(XBlock):
     # SAVE SECTION HEADER
     @XBlock.json_handler
     def save_header(self, data, suffix=''):
-        print "Hello"
         self.hdr_html = data['hdr_html']
 
         self.hdr_book_link = data['hdr_book_link']

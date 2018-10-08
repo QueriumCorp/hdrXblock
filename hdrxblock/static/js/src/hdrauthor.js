@@ -28,17 +28,17 @@ function RoverHeaderXBlock(runtime, element) {
 
             hdr_html : $('#hdr_html', element).val(),
 
-            hdr_book_link : $('#hdr_book_link', element).val(),
-            hdr_book_icon : $('#hdr_book_icon', element).val(),
-            hdr_book_help : ( $('#hdr_book_help', element).val() ? $('#hdr_book_help', element).val() : "" ),
+            hdr_book_link : $('#hdr_book_link', element).val().trim(),
+            hdr_book_icon : $('#hdr_book_icon', element).val().trim(),
+            hdr_book_help : ( $('#hdr_book_help', element).val() ? $('#hdr_book_help', element).val().trim() : "" ),
     
-            hdr_video_link : $('#hdr_video_link', element).val(),
-            hdr_video_icon : $('#hdr_video_icon', element).val(),
-            hdr_video_help : ( $('#hdr_video_help', element).val() ? $('#hdr_video_help', element).val() : "" ),
+            hdr_video_link : $('#hdr_video_link', element).val().trim(),
+            hdr_video_icon : $('#hdr_video_icon', element).val().trim(),
+            hdr_video_help : ( $('#hdr_video_help', element).val() ? $('#hdr_video_help', element).val().trim() : "" ),
     
-            hdr_playground_link : $('#hdr_playground_link', element).val(),
-            hdr_playground_icon : $('#hdr_playground_icon', element).val(),
-            hdr_playground_help : ( $('#hdr_playground_help', element).val() ? $('#hdr_playground_help', element).val() : "" )
+            hdr_playground_link : $('#hdr_playground_link', element).val().trim(),
+            hdr_playground_icon : $('#hdr_playground_icon', element).val().trim(),
+            hdr_playground_help : ( $('#hdr_playground_help', element).val() ? $('#hdr_playground_help', element).val().trim() : "" )
         }
 
         runtime.notify('save', {state:'start'});
@@ -50,7 +50,7 @@ function RoverHeaderXBlock(runtime, element) {
         }).done( function(response){
             console.info('done', response)
             runtime.notify('save', {state:'end'});
-            toggleEditor();
+            //toggleEditor();
             $('.content_text', element).html(data.hdr_html);
 
             $('.hdr_book a', element).attr('href', data.hdr_book_link);
@@ -68,17 +68,17 @@ function RoverHeaderXBlock(runtime, element) {
             console.error(response)
             alert( "Save Failed. Please contact support.")
             runtime.notify('save', {state:'end'});
-            toggleEditor();
+            //toggleEditor();
         });
     });
 
     $('.cancel-button', element).click(function(eventObject) {
         runtime.notify('cancel', {});
-        toggleEditor();
+        //toggleEditor();
     });
 
     // EDIT MODE
-    var edit_mode = true;
+    var edit_mode = false;
     toggleEditor();
 
     function toggleEditor(){
@@ -94,9 +94,11 @@ function RoverHeaderXBlock(runtime, element) {
         }
     }
 
+    /*
     $('.hdr_edit_button', element).click(function(eventObject) {
         toggleEditor();
     });
+    */
 
     $('.url-input', element).on('input',function(e){
         validateLinks();
@@ -105,25 +107,36 @@ function RoverHeaderXBlock(runtime, element) {
     function validateLinks(){
         hdr_book_link_valid = validUrl( $('#hdr_book_link', element).val() );
         indicateUrlStatus( $('#hdr_book_link', element), hdr_book_link_valid );
-
         hdr_book_icon_valid = validUrl( $('#hdr_book_icon', element).val() );
         indicateUrlStatus( $('#hdr_book_icon', element), hdr_book_icon_valid);
+        showHideIcon( '.hdr_book', 
+            $('#hdr_book_link', element).val().length && hdr_book_link_valid && 
+            $('#hdr_book_icon', element).val().length && hdr_book_icon_valid 
+        );
 
         hdr_video_link_valid = validUrl( $('#hdr_video_link', element).val() );
-        indicateUrlStatus( $('#hdr_video_link', element), hdr_video_link_valid);
-        
+        indicateUrlStatus( $('#hdr_video_link', element), hdr_video_link_valid);        
         hdr_video_icon_valid = validUrl( $('#hdr_video_icon', element).val() );
         indicateUrlStatus( $('#hdr_video_icon', element), hdr_video_icon_valid);
+        showHideIcon( '.hdr_video', 
+            $('#hdr_video_link', element).val().length && hdr_video_link_valid && 
+            $('#hdr_video_icon', element).val().length && hdr_video_icon_valid 
+        );
         
         hdr_playground_link_valid = validUrl( $('#hdr_playground_link', element).val() );
-        indicateUrlStatus( $('#hdr_playground_link', element), hdr_playground_link_valid);
-        
+        indicateUrlStatus( $('#hdr_playground_link', element), hdr_playground_link_valid);        
         hdr_playground_icon_valid = validUrl( $('#hdr_playground_icon', element).val() );
         indicateUrlStatus( $('#hdr_playground_icon', element), hdr_playground_icon_valid);
-        
+        showHideIcon( '.hdr_playground', 
+            $('#hdr_playground_link', element).val().length && hdr_playground_link_valid && 
+            $('#hdr_playground_icon', element).val().length && hdr_playground_icon_valid 
+        );
     }
 
     function indicateUrlStatus( el, status ){
+        
+        console.info( el.parent().parent() );
+
         if( status ){
             el.removeClass("url-invalid");
         }else{
@@ -131,9 +144,24 @@ function RoverHeaderXBlock(runtime, element) {
         }
     }
 
+    function showHideIcon( selector, visible ){
+        var icon_el = $(selector, element);
+
+        if( visible ){
+            icon_el.removeClass("hdr_icon_hidden");
+        }else{
+            icon_el.addClass("hdr_icon_hidden");
+        }
+    }
+
+
     // from ChristianDavid's accepted answer
     // https://stackoverflow.com/questions/8667070/javascript-regular-expression-to-validate-url
     function validUrl(value) {
+        if( typeof value=='string' ){
+            value = value.trim();
+        }
+
         if( typeof value=='string' && value.length==0 ){
             return true;
         }else if(  typeof value=='string' ){
