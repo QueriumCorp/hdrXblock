@@ -8,7 +8,7 @@
     font-weight: bold;
 }
 
-.hdrxblock_block .content {
+.hdrxblock_block .hdr_content {
     padding: 10px;
 }
 
@@ -54,13 +54,13 @@
     flex: 1;
 }
 
-.hdrxblock_block .content {
+.hdrxblock_block .hdr_content {
     width:100%;
     display: flex;
     justify-content: space-between;
 }
 
-.hdrxblock_block .content .content_icons {
+.hdrxblock_block .hdr_content .content_icons {
     display: flex;
 }
 
