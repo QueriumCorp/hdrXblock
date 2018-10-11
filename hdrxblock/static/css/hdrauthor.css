@@ -107,19 +107,18 @@
     display: none;
 }
 
-.grp_box {
-    max-width: 480px;
+.hdrxblock_block .grp_box {
 }
 
-.hdr_icon_hidden {
+.hdrxblock_block .hdr_icon_hidden {
     display: none;
 }
 
-.hdr_editor_hidden {
+.hdrxblock_block .hdr_editor_hidden {
     display: none;
 }
 
-.hdr_edit_button {
+.hdrxblock_block .hdr_edit_button {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -127,6 +126,10 @@
     width: 32px;
 }
 
-.url-invalid {
+.hdrxblock_block .url-invalid {
     border-color: red;
+}
+
+.hdrxblock_block .url-input {
+    width: 100%;
 }
