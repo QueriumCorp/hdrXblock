@@ -133,3 +133,8 @@
 .hdrxblock_block .url-input {
     width: 100%;
 }
+
+.modal-type-hdrxblock .modal-content {
+    overflow-y: hidden;
+    padding-bottom: 75px;
+}
