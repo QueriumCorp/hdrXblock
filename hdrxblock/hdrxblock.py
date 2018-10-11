@@ -12,10 +12,11 @@ class RoverHeaderXBlock(XBlock):
 
     # Fields are defined on the class.  You can access them in your code as
     # self.<fieldname>.
+    display_name = String(display_name="Display name", default='Section Header', scope=Scope.settings)
 
     hdr_title = String(help="Section header title", default="<h3>Foobar</h3><p>Mine is the last voice you will ever hear.</p>", scope=Scope.content)
     hdr_text = String(help="Section header text", default="Section Text", scope=Scope.content)
-    hdr_html = String(help="Section header html", default="<h2>Section Header</h2><p>Instructions for the next set of questions.</p>", scope=Scope.content)
+    hdr_html = String(help="Section header html", default="<h2>Section Header</h2><p>Instructions and learning resources for the next set of questions.</p>", scope=Scope.content)
     hdr_book_link = String(help="Section textbook link URL", default="https://cnx.org/contents/9b08c294-057f-4201-9f48-5d6ad992740d", scope=Scope.content)
     hdr_book_icon = String(help="Section textbook icon URL", default="https://png.icons8.com/color/1600/literature.png", scope=Scope.content)
     hdr_book_help = String(help="Section textbook help text", default="Takes you to the corresponding section of the textbook", scope=Scope.content)
