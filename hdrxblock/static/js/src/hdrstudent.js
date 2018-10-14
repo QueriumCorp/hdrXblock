@@ -1,7 +1,6 @@
 /* Javascript for RoverHeaderXBlock. */
 function RoverHeaderXBlock(runtime, element) {
-    debugger;
-    // element.closest(".vert").addClass("dont_number");
+    element.closest(".vert").classList.add("dont_number");
     showHide( '.hdr_book' );
     showHide( '.hdr_video' );
     showHide( '.hdr_playground' );
