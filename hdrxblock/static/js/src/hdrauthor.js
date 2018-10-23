@@ -108,29 +108,20 @@ function RoverHeaderXBlock(runtime, element) {
         hdr_book_link_valid = validUrl( $('#hdr_book_link', element).val() );
         indicateUrlStatus( $('#hdr_book_link', element), hdr_book_link_valid );
         hdr_book_icon_valid = validUrl( $('#hdr_book_icon', element).val() );
-        indicateUrlStatus( $('#hdr_book_icon', element), hdr_book_icon_valid);
-        showHideIcon( '.hdr_book', 
-            $('#hdr_book_link', element).val().length && hdr_book_link_valid && 
-            $('#hdr_book_icon', element).val().length && hdr_book_icon_valid 
-        );
+        indicateUrlStatus( $('#hdr_book_icon', element), hdr_book_icon_valid );
+        showHideIcon( '.hdr_book', hdr_book_link_valid, hdr_book_icon_valid );
 
         hdr_video_link_valid = validUrl( $('#hdr_video_link', element).val() );
-        indicateUrlStatus( $('#hdr_video_link', element), hdr_video_link_valid);        
+        indicateUrlStatus( $('#hdr_video_link', element), hdr_video_link_valid );        
         hdr_video_icon_valid = validUrl( $('#hdr_video_icon', element).val() );
-        indicateUrlStatus( $('#hdr_video_icon', element), hdr_video_icon_valid);
-        showHideIcon( '.hdr_video', 
-            $('#hdr_video_link', element).val().length && hdr_video_link_valid && 
-            $('#hdr_video_icon', element).val().length && hdr_video_icon_valid 
-        );
-        
+        indicateUrlStatus( $('#hdr_video_icon', element), hdr_video_icon_valid );
+        showHideIcon( '.hdr_video', hdr_video_link_valid, hdr_video_icon_valid );
+
         hdr_playground_link_valid = validUrl( $('#hdr_playground_link', element).val() );
         indicateUrlStatus( $('#hdr_playground_link', element), hdr_playground_link_valid);        
         hdr_playground_icon_valid = validUrl( $('#hdr_playground_icon', element).val() );
         indicateUrlStatus( $('#hdr_playground_icon', element), hdr_playground_icon_valid);
-        showHideIcon( '.hdr_playground', 
-            $('#hdr_playground_link', element).val().length && hdr_playground_link_valid && 
-            $('#hdr_playground_icon', element).val().length && hdr_playground_icon_valid 
-        );
+        showHideIcon( '.hdr_playground', hdr_playground_link_valid, hdr_playground_icon_valid );
     }
 
     function indicateUrlStatus( el, status ){
@@ -144,11 +135,14 @@ function RoverHeaderXBlock(runtime, element) {
         }
     }
 
-    function showHideIcon( selector, visible ){
+    function showHideIcon( selector, visible, icon ){
         var icon_el = $(selector, element);
 
         if( visible ){
             icon_el.removeClass("hdr_icon_hidden");
+            if( icon ){
+                $('img', icon_el).attr('src', icon );
+            }
         }else{
             icon_el.addClass("hdr_icon_hidden");
         }
@@ -163,9 +157,13 @@ function RoverHeaderXBlock(runtime, element) {
         }
 
         if( typeof value=='string' && value.length==0 ){
-            return true;
+            return false;
         }else if(  typeof value=='string' ){
-            return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value);
+            if( /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value) ){
+                return value;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }

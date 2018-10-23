@@ -24,7 +24,7 @@ class RoverHeaderXBlock(XBlock):
     hdr_playground_icon = String(help="Section playground icon URL", default="https://png.icons8.com/color/1600/playground.png", scope=Scope.content)
     hdr_playground_help = String(help="Section playground help text", default="This playground will help you learn.", scope=Scope.content)
     hdr_video_link = String(help="Section video link URL", default="https://www.openstax.org", scope=Scope.content)
-    hdr_video_icon = String(help="Section video icon URL", default="https://png.icons8.com/color/50/000000/video-conference.png", scope=Scope.content)
+    hdr_video_icon = String(help="Section video icon URL", default="", scope=Scope.content)
     hdr_video_help = String(help="Section video help text", default="This video will help you learn.", scope=Scope.content)
 
     def resource_string(self, path):

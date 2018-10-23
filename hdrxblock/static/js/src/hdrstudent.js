@@ -1,6 +1,11 @@
 /* Javascript for RoverHeaderXBlock. */
 function RoverHeaderXBlock(runtime, element) {
-    element.closest(".vert").classList.add("dont_number");
+    // tag the enclosing .vert element so it doesnt get numbered like questions
+    var vert = element.closest(".vert");
+    if( vert ){
+        vert.classList.add("dont_number");
+    }
+
     showHide( '.hdr_book' );
     showHide( '.hdr_video' );
     showHide( '.hdr_playground' );
@@ -8,10 +13,13 @@ function RoverHeaderXBlock(runtime, element) {
     function showHide( selector ){
         var url_ele = $(selector, element);
         var url_href = $('a', url_ele).attr('href');
-        var icon_href = $('img', url_ele).attr('src');
+        var icon_href = $('img', url_ele).attr('x_src');
                 
-        if( validUrl(url_href) && validUrl(icon_href) ){
+        if( validUrl(url_href) ){
             url_ele.removeClass("hdr_icon_hidden");
+            if( validUrl( icon_href ) ){
+                $('img', url_ele).attr('src', icon_href);
+            }
         }else{
             url_ele.addClass("hdr_icon_hidden");
         }

@@ -58,6 +58,7 @@
     width:100%;
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .hdrxblock_block .hdr_content .content_icons {
@@ -65,8 +66,8 @@
 }
 
 .hdr_book {
-    height: 48px;
-    width: 48px;
+    height: 32px;
+    width: 32px;
     margin-left: 5px;
 }
 .hdr_book img {
@@ -75,8 +76,8 @@
 }
 
 .hdr_video {
-    height: 48px;
-    width: 48px;
+    height: 32px;
+    width: 32px;
     margin-left: 5px;
 }
 .hdr_video img {
@@ -85,8 +86,8 @@
 }
 
 .hdr_playground {
-    height: 48px;
-    width: 48px;
+    height: 32px;
+    width: 32px;
     margin-left: 5px;
 }
 .hdr_playground img {
