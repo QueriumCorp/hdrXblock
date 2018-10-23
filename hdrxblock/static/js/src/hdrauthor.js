@@ -17,13 +17,6 @@ function RoverHeaderXBlock(runtime, element) {
     var handlerUrl = runtime.handlerUrl(element, 'save_header');
 
     $('.save-button', element).click(function(eventObject) {
-
-        if( !( hdr_book_link_valid && hdr_book_icon_valid && hdr_video_link_valid && 
-            hdr_video_icon_valid && hdr_playground_link_valid && hdr_playground_icon_valid ) ){
-            console.error("invalid links");
-            return;
-        }
-
         var data = {
 
             hdr_html : $('#hdr_html', element).val(),
