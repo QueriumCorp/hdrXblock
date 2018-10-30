@@ -2,7 +2,8 @@
 .hdrxblock_block {
     position: relative;
     width: 100%;
-    background: #f1f1f1;
+    background: white;
+    margin-top: 5px;
 }
 .hdrxblock_block .count {
     font-weight: bold;
@@ -25,33 +26,6 @@
     width: 100%;
     height: 5px;
     display: flex;
-}
-.hdrxblock_block .hdr_banner_1 {
-    height: 100%;
-    background: #f47641;
-    flex: 1;
-}
-
-.hdrxblock_block .hdr_banner_2 {
-    height: 100%;
-    background: #77af42;
-    flex: 1;
-}
-
-.hdrxblock_block .hdr_banner_3 {
-    height: 100%;
-    background: #00246a;
-    flex: 1;
-}
-.hdrxblock_block .hdr_banner_4 {
-    height: 100%;
-    background: #f4d019;
-    flex: 1;
-}
-.hdrxblock_block .hdr_banner_5 {
-    height: 100%;
-    background: #5e6062;
-    flex: 1;
 }
 
 .hdrxblock_block .hdr_content {
