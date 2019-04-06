@@ -3,7 +3,10 @@
 import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Integer, String, Scope
-from xblock.fragment import Fragment
+
+# McDaniel apr-2019: this is deprecated.
+#from xblock.fragment import Fragment
+from web_fragments.fragment import Fragment
 
 
 class RoverHeaderXBlock(XBlock):
