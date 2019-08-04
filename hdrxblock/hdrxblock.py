@@ -15,7 +15,12 @@ class RoverHeaderXBlock(XBlock):
 
     # Fields are defined on the class.  You can access them in your code as
     # self.<fieldname>.
+
+
     display_name = String(display_name="Display name", default='Section Header', scope=Scope.settings)
+
+    # Hidden field to hold the UUID of this instance.
+    url_name = String(help="URL Name", default="None", scope=Scope.content)
 
     hdr_title = String(help="Section header title", default="<h3>Foobar</h3><p>Mine is the last voice you will ever hear.</p>", scope=Scope.content)
     hdr_text = String(help="Section header text", default="Section Text", scope=Scope.content)
