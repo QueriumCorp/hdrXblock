@@ -50,6 +50,7 @@ class RoverHeaderXBlock(XBlock):
         frag = Fragment(html.format(self=self))
         frag.add_css(self.resource_string("static/css/hdrstudent.css"))
         frag.add_javascript(self.resource_string("static/js/src/hdrstudent.js"))
+        frag.add_javascript_url("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML")
         frag.initialize_js('RoverHeaderXBlock')
         return frag
 
@@ -63,6 +64,7 @@ class RoverHeaderXBlock(XBlock):
         frag = Fragment(html.format(self=self))
         frag.add_css(self.resource_string("static/css/hdrauthor.css"))
         frag.add_javascript(self.resource_string("static/js/src/hdrauthor.js"))
+        frag.add_javascript_url("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML")
         frag.initialize_js('RoverHeaderXBlock')
         return frag
 
